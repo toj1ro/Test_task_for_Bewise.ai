@@ -1,0 +1,20 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=questions_db
+    expose:
+      - 5432
+  web:
+    build: .
+    command: uvicorn main:app  --reload --host 0.0.0.0
+    volumes:
+      - .:/usr/src/test_task_for_bewise
+    ports:
+      - 8000:8000
